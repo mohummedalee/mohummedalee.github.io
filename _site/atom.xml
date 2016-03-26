@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Umm...</title>
+ <link href="http://m-ali.org/atom.xml" rel="self"/>
+ <link href="http://m-ali.org/"/>
+ <updated>2016-03-26T23:58:45+05:00</updated>
+ <id>http://m-ali.org</id>
+ <author>
+   <name>Muhammad Ali</name>
+   <email></email>
+ </author>
+
+ 
+
+</feed>

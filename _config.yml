@@ -1,0 +1,29 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            'Umm...'
+# tagline:          'No tagline (yet)'
+description:      'Sporadic observations in computer science and life by <a href="https://twitter.com/ismuhammadali" target="_blank">@ismuhammadali</a>.'
+url:              http://m-ali.org
+baseurl:          /
+
+author:
+  name:           'Muhammad Ali'
+  url:            http://m-ali.org
+  twitter:        https://twitter.com/ismuhammadali
+
+paginate:         5
+
+# Custom vars
+# Jus recycled, don't quite need these
+version:          2.1.0
+
+github:
+  repo:           https://github.com/mohummedalee/mohummedalee.github.io
+
+gems: [jekyll-paginate, jekyll-gist]
