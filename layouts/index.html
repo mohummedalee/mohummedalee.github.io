@@ -1,0 +1,22 @@
+{{ define "main" -}}
+{{ if .Site.Params.light_dark }}
+    {{ partial "light_dark.html" . }}
+{{ end }}
+<div class="post">
+    <!-- could be a different page too here-->
+    {{ with .Site.GetPage "/landing" }}
+        {{ if .Pages }}
+            {{ range .Pages }}
+                <!-- <h1 class="post-title">{{ .Title }}</h1> -->
+                {{ .Content }}
+            {{ end }}
+        {{ else }}
+            <!-- <h1 class="post-title">{{ .Title }}</h1> -->
+            {{ .Content }}
+        {{ end }}
+    {{ end }}
+    {{ if (.Site.Params.listmonk) }}
+        {{ partial "post/listmonk_email_newsletters.html" . }}
+    {{ end }}
+</div>
+{{ end }}
