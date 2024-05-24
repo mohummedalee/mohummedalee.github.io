@@ -1,0 +1,3 @@
+[submodule "themes/poison"]
+	path = themes/ananke
+	url = https://github.com/lukeorth/poison.git
