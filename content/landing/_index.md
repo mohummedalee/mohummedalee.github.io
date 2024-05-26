@@ -2,9 +2,7 @@
 layout: single
 ---
 
-My name is Ali, and I am a postdoctoral researcher at Northeastern University's [Institute for Experiential AI](https://ai.northeastern.edu/research/). I work broadly in the area of Responsible AI, where I build methods to better evaluate machine learning systems, and to measure their failures.
-
-This site serves as a portfolio and a blog.
+My name is Ali, and I am a researcher at Northeastern University's [Institute for Experiential AI](https://ai.northeastern.edu/research/). This site hosts a portfolio and a blog.
 
 ### Selected Papers
 * [Problematic Advertising and its Disparate Exposure on Facebook.](/papers/usenixsecurity23-ali.pdf)
