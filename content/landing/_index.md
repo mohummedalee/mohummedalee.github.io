@@ -12,15 +12,16 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
 
 ### Service
 - **Program Committees:**
-    - FAccT '21, '22, '23, '24
-    - TheWebConf '23
+    - FAccT '21, '22, '23, '24    
     - IC2S2 '23, '24
-    - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '23
     - Responsible Generative AI Workshop (ReGenAI) @ CVPR '24
+    - TheWebConf '23
+    - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '23    
 * **External Reviewing:**
+    - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24
+    - NeurIPS '21, '23 (ethics reviewer)    
     - CSCW '20, '21, '23
-    - PETS '22
-    - NeurIPS '21, '23 (ethics reviewer)
+    - PETS '22    
 
 <!-- ### Teaching
 * Lecturer, **CY 2550: Introduction to Cybersecurity**, Northeastern University, Summer II 2023
