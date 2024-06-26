@@ -4,7 +4,7 @@ layout: single
 ---
 
 ### Papers
-[C]: Conference; [W]: Workshop; [EA]: Extended Abstract 
+[C]: Conference; [W]: Workshop; [A]: Extended Abstract 
 
 #### [Problematic Advertising and its Disparate Exposure on Facebook](/papers/usenixsecurity23-ali.pdf) [C]
 Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023. [[bibtex]](/bibtex/usenix23.bib), [[arXiv]](https://arxiv.org/abs/2306.06052)
@@ -13,7 +13,7 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
 Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _Workshop on Technology and Consumer Protection (ConPro) 2022
 at IEEE S&P_, San Francisco, CA, May 2022. [[bibtex]](/bibtex/conpro22.bib)
 
-#### [Measuring and Mitigating Bias and Harm in Personalized Advertising](/papers/recsys21-26.pdf) [EA]
+#### [Measuring and Mitigating Bias and Harm in Personalized Advertising](/papers/recsys21-26.pdf) [A]
 Muhammad Ali. _ACM Conference on Recommender Systems (RecSys)_, Amsterdam, The Netherlands, Sep 2021. [[bibtex]](/bibtex/recsys21.bib)
 
 #### [Ad Delivery Algorithms: The Hidden Arbiters of Political Messaging](/papers/ali-2021-wsdm.pdf) [C]

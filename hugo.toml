@@ -23,11 +23,11 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
         # URL:          The directory relative to the content directory.
         # HasChildren:  If the directory's files should be listed.  Default is true.
         # Limit:        If the files should be listed, how many should be shown.
-    menu = [
+    menu = [        
         {Name = "Publications", URL = "/publications/", HasChildren = false},
+        {Name = "Blog", URL = "/posts/", HasChildren = false},
         {Name = "About", URL = "/about/", HasChildren = false},        
-        # {Name = "Blog", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
-        # {Name = "Blog", URL = "/posts/", HasChildren = false},
+        # {Name = "Blog", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},        
     ]
 
     # front_page_content = ["about", "posts"]
@@ -107,10 +107,10 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     # publisher_icon = ""                 # path to publisher icon - defaults to favicon, used in schema
 
 # NOTE: If using Disqus as commenting engine, uncomment and configure this line
-[config.services]
-    disqus = [
-        {shortname = "yourDisqusShortname"},        
-    ]
+[config]
+    [[config.services]]
+        [[config.services.disqus]]
+            shortname = "yourDisqusShortname"    
 
 [taxonomies]
     series = 'series'
