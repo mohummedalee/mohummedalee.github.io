@@ -5,6 +5,9 @@ layout: single
 My name is Ali, and I am a researcher at Northeastern University's [Institute for Experiential AI](https://ai.northeastern.edu/research/). This site hosts a portfolio and a blog.
 
 ### Selected Papers
+* [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf)
+Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv Preprint_, Jul 2024.
+
 * [Problematic Advertising and its Disparate Exposure on Facebook.](/papers/usenixsecurity23-ali.pdf)
 Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023.
 

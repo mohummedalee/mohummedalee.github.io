@@ -4,7 +4,11 @@ layout: single
 ---
 
 ### Papers
-[C]: Conference; [W]: Workshop; [A]: Extended Abstract 
+[C]: Conference; [W]: Workshop; [P]: Preprint; [A]: Extended Abstract 
+
+####  [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf) [P]
+Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv_, Jul 2024.
+[[bibtex]](/bibtex/arxiv24-bert.bib), [[arXiv]](https://arxiv.org/abs/2407.21058)
 
 #### [Problematic Advertising and its Disparate Exposure on Facebook](/papers/usenixsecurity23-ali.pdf) [C]
 Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023. [[bibtex]](/bibtex/usenix23.bib), [[arXiv]](https://arxiv.org/abs/2306.06052)
