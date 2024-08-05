@@ -18,8 +18,10 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
     - TheWebConf '23
     - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '23    
 * **External Reviewing:**
-    - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24
-    - NeurIPS '21, '23 (ethics reviewer)    
+    - ICWSM '25
+    - NeurIPS '21, '23, '24 (ethics reviewer)    
+    - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24        
+    - ML4H '23
     - CSCW '20, '21, '23
     - PETS '22    
 
