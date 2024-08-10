@@ -1,1 +1,1 @@
-Testing GH-Pages
+Public (WIP) homepage+blog hosted at https://m-ali.org.
