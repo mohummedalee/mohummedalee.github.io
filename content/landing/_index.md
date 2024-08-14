@@ -2,7 +2,7 @@
 layout: single
 ---
 
-My name is Ali, and I am currently a research scientist at [Apple](https://machinelearning.apple.com/). My work focuses on evaluation of machine learning systems. This site hosts a portfolio and a blog.
+<!-- My name is Ali, and I am currently a research scientist at [Apple](https://machinelearning.apple.com/). My work focuses on evaluation of machine learning systems. This site hosts a portfolio and a blog. -->
 
 ### Selected Papers
 
