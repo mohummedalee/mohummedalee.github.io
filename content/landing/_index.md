@@ -2,11 +2,9 @@
 layout: single
 ---
 
-My name is Ali, and I am a researcher at Northeastern University's [Institute for Experiential AI](https://ai.northeastern.edu/research/). This site hosts a portfolio and a blog.
+My name is Ali, and I am currently a research scientist at [Apple](https://machinelearning.apple.com/). My work focuses on evaluation of machine learning systems. This site hosts a portfolio and a blog.
 
 ### Selected Papers
-* [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf)
-Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv Preprint_, Jul 2024.
 
 * [Problematic Advertising and its Disparate Exposure on Facebook.](/papers/usenixsecurity23-ali.pdf)
 Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023.
@@ -16,17 +14,17 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
 ### Service
 - **Program Committees:**
     - FAccT '24, '23, '22, '21
-    - IC2S2 '24, '23
-    - Responsible Generative AI Workshop (ReGenAI) @ CVPR '24
+    - IC2S2 '24, '23    
     - TheWebConf '23
-    - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '23    
+    - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '24, '23    
+    - Responsible Generative AI Workshop (ReGenAI) @ CVPR '24
 * **External Reviewing:**
     - ICWSM '25
-    - NeurIPS '24, '23, '21 (ethics reviewer)    
-    - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24        
+    - NeurIPS '24, '23, '21 (ethics reviewer)        
     - ML4H '24, '23
     - CSCW '23, '21, '20
     - PETS '22    
+    - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24        
 
 <!-- ### Teaching
 * Lecturer, **CY 2550: Introduction to Cybersecurity**, Northeastern University, Summer II 2023
