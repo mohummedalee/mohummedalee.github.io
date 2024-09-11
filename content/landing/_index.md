@@ -2,9 +2,17 @@
 layout: single
 ---
 
-<!-- My name is Ali, and I am currently a research scientist at [Apple](https://machinelearning.apple.com/). My work focuses on evaluation of machine learning systems. This site hosts a portfolio and a blog. -->
+I am a data scientist and researcher based in Cambridge, MA.
+I have a PhD in computer science, with research in data science and human-computer interaction.
+I enjoy using technical tools to understand and solve human problems.
+
+I currently work for Apple, focusing on Responsible AI in Apple [Services](https://www.apple.com/services/).
+
+<!-- This site hosts a portfolio and a blog. -->
 
 ### Selected Papers
+
+* [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf) Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv_, Jul 2024.
 
 * [Problematic Advertising and its Disparate Exposure on Facebook.](/papers/usenixsecurity23-ali.pdf)
 Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023.

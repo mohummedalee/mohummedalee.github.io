@@ -3,6 +3,8 @@ title: Publications
 layout: single
 ---
 
+Also see: [Google Scholar](https://scholar.google.com/citations?user=pLeu3X0AAAAJ).
+
 ### Papers
 [C]: Conference; [W]: Workshop; [P]: Preprint; [A]: Extended Abstract
 
@@ -34,6 +36,7 @@ New York, NY, February 2018. [[bibtex]](/bibtex/facct18.bib)
 
 [W] [On Quantifying Knowledge Segregation in Society](/papers/information-segregation.pdf) Abhijnan Chakraborty, Muhammad Ali, Saptarshi Ghosh, Niloy Ganguly, and Krishna P. Gummadi. Proceedings of the _FATREC Workshop on Responsible Recommendation (colocated with RecSys 2017)_, Como, Italy, August 2017. [[bibtex]](/bibtex/facctrec17.bib)
 
+_asterisk (*) indicates equal authorship_
 
 ---
 
