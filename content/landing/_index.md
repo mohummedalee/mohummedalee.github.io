@@ -27,6 +27,7 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
     - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '24, '23    
     - Responsible Generative AI Workshop (ReGenAI) @ CVPR '24
 * **External Reviewing:**
+    - CHI '25
     - ICWSM '25
     - NeurIPS '24, '23, '21 (ethics reviewer)        
     - ML4H '24, '23
