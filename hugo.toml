@@ -4,13 +4,8 @@ theme = "poison"
 paginate = 10
 pluralizelisttitles = false   # removes the automatically appended "s" on sidebar entries
 
-# NOTE: If using Disqus as commenting engine, uncomment and configure this line
-# disqusShortname = "yourDisqusShortname"
-
-[author]
-    name = "Muhammad Ali"
-
 [params]
+    author = "Muhammad Ali"
     brand = "Ali"                            # name of your site - appears in the sidebar
     brand_image = "/images/headshot.jpg"          # path to the image shown in the sidebar
     # description = "Northeastern University"   # Used as default meta description if not specified in front matter
@@ -25,7 +20,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
         # Limit:        If the files should be listed, how many should be shown.
     menu = [        
         {Name = "Publications", URL = "/publications/", HasChildren = false},
-        # {Name = "Blog", URL = "/posts/", HasChildren = false},
+        {Name = "Blog", URL = "/posts/", HasChildren = false},
         {Name = "About", URL = "/about/", HasChildren = false},        
         # {Name = "Blog", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},        
     ]
