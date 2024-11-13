@@ -1,9 +1,9 @@
 ---
 title: "Getting the Hang of Instruction Tuning"
-date: 2024-11-11
+date: 2024-11-13
 draft: true
 hideToc: false
-# summary: "A hands-on programming tutorial of instruction tuning"
+summary: "A hands-on programming tutorial of instruction tuning"
 ---
 
 **Note**: All code discussed in this post lives in [this repository](https://github.com/mohummedalee/instruction-tuning-gemma-2b/).
@@ -38,7 +38,7 @@ In this post, I'll use the [Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.
 }
 ```
 
-Note that in addition to the instruction (`instruction`) and response (`output`), it also includes an additional `input` field. This field is present only for 40% of the data points, and allows for optional context or input for the task. In turn, this additional field enables the model to also take user-described context into account beyond the core instruction. To pass each point to a model, it is formatted into a coherent sentence like:
+Note that in addition to the instruction (`instruction`) and response (`output`), it also includes an additional `input` field. This field is present only for 40% of the data points, and allows for optional context or input for the task. In turn, this additional field enables the model to also take user-described context into account beyond the core instruction. To pass each point to a model, it needs to be formatted into a coherent sentence like:
 
 ```
 Below is an instruction that describes a task.
@@ -68,6 +68,17 @@ def format_input(entry):
     return instruction_text + input_text
 ```
 
-Before tokenizing the text, the `### Response` part is also appended to the string outside of this function, after which, we want the model to finish the sentence. See the `InstructionDataset` class in [data.py](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/0745c64689b1334485b0b525264366361c9f5d7d/scripts/data.py#L5C7-L5C25).
+Before tokenizing the text, the `### Response` part is also appended to the string outside of this function, after which, we want the model to finish the sentence. For a full implementation, see the `InstructionDataset` class in [data.py](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/0745c64689b1334485b0b525264366361c9f5d7d/scripts/data.py#L5C7-L5C25).
 
 ### Model
+
+I chose to go with a [Gemma 2B](https://huggingface.co/google/gemma-2b) model to fine-tune. You can choose any transformer model for this purpose really; the only constraint would be how many GPUs and time you have. You're essentially training the model on next token prediction with cross-entropy loss, but on a very specific kind of instruction data, and not the entire Internet. I chose Gemma because it already has both a base ([`gemma-2b`](https://huggingface.co/google/gemma-2b)) and an instruction-tuned ([`gemma-2b-it`](https://huggingface.co/google/gemma-2b-it)) variant---so there's already a good IT model to evaluate mine against.
+
+### Implementing from Scratch
+
+Before I talk about how HuggingFace's built-in methods can be used to implement IT, I wanted to discuss the from-scratch version presented in the book.
+It's a fantastic exercise to gain confidence, and see how incredibly simple the core logic is.
+
+TODO:
+
+### Implementing with off-the-shelf Tools
