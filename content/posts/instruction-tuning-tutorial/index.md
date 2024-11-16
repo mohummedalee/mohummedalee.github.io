@@ -4,6 +4,7 @@ date: 2024-11-13
 draft: true
 hideToc: false
 summary: "A hands-on programming tutorial of instruction tuning"
+tags: [machine learning, tutorial]
 ---
 
 **Note**: All code discussed in this post lives in [this repository](https://github.com/mohummedalee/instruction-tuning-gemma-2b/).
@@ -79,6 +80,66 @@ I chose to go with a [Gemma 2B](https://huggingface.co/google/gemma-2b) model to
 Before I talk about how HuggingFace's built-in methods can be used to implement IT, I wanted to discuss the from-scratch version presented in the book.
 It's a fantastic exercise to gain confidence, and see how incredibly simple the core logic is.
 
-TODO:
+
+To my surprise, most of the work happens in the how you the training batches are collated together. If you write PyTorch, you probably know that collate functions (`collate_fn`) in PyTorch are used to write the logic for how a DataLoader should stack together tensors for each batch ([PyTorch docs](https://pytorch.org/docs/stable/data.html)). Given a batch of sentences in the IT dataset, you carefully assemble the input and output tensors in `collate_fn` so the output tensor is one token ahead. So, the tall order of getting a model to follow instructions is, quite remarkably, just next token prediction on sentences that are written in a templated format of an *Instruction*, an *Input* and a *Response*. Given the massive [memory](https://memit.baulab.info/) of modern models, and the ability of Transformers to find the right context, this recipe just works.
+
+Raschka's [code](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) does a wonderful job of slowly building up complexity by writing multiple drafts of the collate function before introducing the final version. I wholeheartedly recommend the exercise; I re-share the final collate function here with my comments:
+
+```
+def custom_collate_fn(
+    batch,
+    # GPT-2's endoftext token ID
+    pad_token_id=50256,
+    # PyTorch's cross_entropy function will ignore these in computation
+    ignore_index=-100,    
+    allowed_max_length=None,
+    device="cpu"
+):
+    """Figure out the longest sentence in the batch,
+    that will be the width of the batch"""
+    batch_max_length = max(len(item)+1 for item in batch)
+    """Assemble input and output in separate lists"""
+    inputs_lst, targets_lst = [], []
+
+    for item in batch:
+        new_item = item.copy()
+        new_item += [pad_token_id]
+
+        """Pad all space needed to
+        match batch_max_length with endoftext tokens"""
+        padded = (
+            new_item + [pad_token_id] *
+            (batch_max_length - len(new_item))
+        )
+        """
+        Voila! Input is just train sentence without the last token;
+        output is the same without the first token
+        At each index in the input, the model should
+        predict the token at index+1 in the target
+        """
+        inputs = torch.tensor(padded[:-1])
+        targets = torch.tensor(padded[1:])
+
+        """Do not compute loss on padding tokens in the target sequence;
+        do not backprop this additional loss"""
+        mask = targets == pad_token_id
+        indices = torch.nonzero(mask).squeeze()
+        if indices.numel() > 1:
+            targets[indices[1:]] = ignore_index
+
+        # Trim max_length if asked
+        if allowed_max_length is not None:
+            inputs = inputs[:allowed_max_length]
+            targets = targets[:allowed_max_length]
+
+        inputs_lst.append(inputs)
+        targets_lst.append(targets)
+
+    inputs_tensor = torch.stack(inputs_lst).to(device)
+    targets_tensor = torch.stack(targets_lst).to(device)
+    return inputs_tensor, targets_tensor
+```
 
 ### Implementing with off-the-shelf Tools
+While I enjoyed the exercise of writing the whole thing from scratch, when I started to actually train a large model,
+I resorted to using HuggingFace's [`DataCollatorForLanguageModeling`](https://huggingface.co/docs/transformers/v4.46.2/en/main_classes/data_collator#transformers.DataCollatorForLanguageModeling), just so I could easily plug it into a `Trainer`.
