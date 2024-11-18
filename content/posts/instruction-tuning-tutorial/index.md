@@ -1,6 +1,6 @@
 ---
 title: "Getting the Hang of Instruction Tuning"
-date: 2024-11-13
+date: 2024-11-17
 draft: true
 hideToc: false
 summary: "A hands-on programming tutorial of instruction tuning. This enables us to take a base Gemma 2B model and fine-tune it on Alpaca dataset to follow user instructions."
@@ -20,6 +20,15 @@ Given the near-universal impact IT has had on LLMs, I decided to pop under the h
 
 ## Programming instruction tuning from scratch
 Lucky for me, [Sebastian Raschka](https://sebastianraschka.com) has been putting out incredible teaching content to lay out all the gory details of building LLMs. I learnt all of the things in this post by following along [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07) of his new book, [Build a Large Language Model (From Scratch)](https://www.manning.com/books/build-a-large-language-model-from-scratch).
+
+### Model
+
+I chose to go with a [Gemma 2B](https://huggingface.co/google/gemma-2-2b) model to fine-tune. You can choose any transformer model for this purpose really; the only constraint would be how many GPUs and time you have. You're essentially training the model on next token prediction with cross-entropy loss, but on a very specific kind of instruction-response data, and not the entire Internet. I chose Gemma because it already has both a base ([`gemma-2-2b`](https://huggingface.co/google/gemma-2b)) and an instruction-tuned ([`gemma-2-2b-it`](https://huggingface.co/google/gemma-2b-it)) variant---so there's already a good baseline to compare my IT fine-tune against.
+
+**Parameter-efficient fine-tuning.** Since I'm working with a larger model than the one used in the book (GPT-2), I had to make a few tradeoffs.
+Further, I did not want to buy a great deal of GPU compute on my Lightning [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code), so I resorted to doing a LoRA ([Hu et. al., 2021]((https://arxiv.org/abs/2106.09685))) parameter-efficient fine-tune, which vastly reduces the number of parameters to tweak.
+Compared to all 2.6b trainable parameters for a full fine-tune, with $r=8$ and $\alpha=32$, LoRA fine-tuned only ~1.5m (0.06%) of these.
+This allowed me to fit the whole job on a single A10G GPU.
 
 ### Dataset
 To teach a model to follow instructions, you first need a dataset of high-quality, ideally human-written instructions.
@@ -71,14 +80,48 @@ def format_input(entry):
 
 Before tokenizing the text, the `### Response` part is also appended to the string outside of this function, after which, we want the model to finish the sentence. For a full implementation, see the `InstructionDataset` class in [data.py](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/0745c64689b1334485b0b525264366361c9f5d7d/scripts/data.py#L5C7-L5C25).
 
-### Model
+Here's the function I use to load and prepare train-test splits for this exercise.
+For the following fine-tuning task, I combine the Alpaca dataset with the [`instruction-data.json`](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/instruction-data.json) file from Raschka's repo.
 
-I chose to go with a [Gemma 2B](https://huggingface.co/google/gemma-2-2b) model to fine-tune. You can choose any transformer model for this purpose really; the only constraint would be how many GPUs and time you have. You're essentially training the model on next token prediction with cross-entropy loss, but on a very specific kind of instruction-response data, and not the entire Internet. I chose Gemma because it already has both a base ([`gemma-2-2b`](https://huggingface.co/google/gemma-2b)) and an instruction-tuned ([`gemma-2-2b-it`](https://huggingface.co/google/gemma-2b-it)) variant---so there's already a good baseline to compare my IT fine-tune against.
+```
+import json
+from transformers import AutoTokenizer
 
-**Parameter-efficient fine-tuning.** For my exercise, since I'm working with a larger model than the book (GPT-2), I had to make a few tradeoffs.
-Further, I did not want to buy a great deal of GPU compute on my Lightning [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code), so I resorted to doing a LoRA ([Hu et. al., 2021]((https://arxiv.org/abs/2106.09685))) parameter-efficient fine-tune, which vastly reduces the number of parameters to tweak.
-Compared to all 2.6b trainable parameters for a full fine-tune, with $r=8$ and $\alpha=32$, LoRA fine-tuned only ~1.5m (0.06%) of these.
-This allowed me to fit the whole job on a single A10G GPU.
+
+def load_and_split_data(data_paths, train_split=0.85, test_split=0.1):
+    data = []
+    for path in data_paths:
+        with open(path, 'r') as f:
+            data.extend(json.load(f))
+    
+    N = len(data)
+    print(f'Total data: {N}')
+
+    train_portion = int(N * train_split)
+    test_portion = int(N * test_split)
+    val_portion = N - train_portion - test_portion
+
+    train_data = data[:train_portion]
+    test_data = data[train_portion:train_portion + test_portion]
+    val_data = data[train_portion + test_portion:]
+
+    print(f"Training set length: {len(train_data)}")
+    print(f"Validation set length: {len(val_data)}")
+    print(f"Test set length: {len(test_data)}")
+
+    return train_data, val_data, test_data
+
+train_data, val_data, test_data = load_and_split_data(
+        ["alpaca-data.json", "instruction-data.json"]
+)
+
+# convert to custom InstructionDataset class
+tokenizer = AutoTokenizer.from_pretrained("google/gemma-2-2b")
+
+train_dataset = InstructionDataset(train_data, tokenizer)
+val_dataset = InstructionDataset(val_data, tokenizer)
+test_dataset = InstructionDataset(test_data, tokenizer)
+```
 
 ### Implementing from Scratch
 
@@ -91,6 +134,8 @@ To my surprise, most of the work happens in how the input and output tokens in t
 Raschka's [Chapter 7 notebook](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) does a wonderful job of slowly building up complexity by writing multiple drafts of the collate function before introducing the final version. I wholeheartedly recommend the exercise; I re-share the final collate function here with my comments:
 
 ```
+import torch
+
 def custom_collate_fn(
     batch,
     # GPT-2's endoftext token ID
@@ -198,7 +243,6 @@ model = AutoModelForCausalLM.from_pretrained(
     attn_implementation='eager'
 )
 model = setup_lora_model(model)
-tokenizer = AutoTokenizer.from_pretrained("google/gemma-2-2b")
 ```
 
 After this setup, you can conveniently set up training arguments and the Trainer to execute the training loop for a few epochs.
@@ -266,10 +310,74 @@ The final model is available on HuggingFace [here](https://huggingface.co/lukshm
 
 ### Qualitative Evaluation
 After fine-tuning the model, it's important to see if we have improved anything beyond the Gemma base model.
+It is common practice in such training runs to inspect a few examples by eye and qualitatively understand how we've changed the model.
+For better or worse, this has also come to be known as ["vibes-based evaluation"](https://www.interconnects.ai/p/the-interface-era-of-ai); but in principle, looking at your model's outputs is always a good idea.
+We can inspect the model's outputs on the `test_dataset` split we prepared earlier:
+
+```
+from tqdm.auto import tqdm
+
+model_ft = AutoModelForCausalLM.from_pretrained(
+    "lukshmichowk/gemma-2b-it-alpaca"
+)
+model_base = AutoModelForCausalLM.from_pretrained(
+    "google/gemma-2-2b"
+)
+
+for i, entry in tqdm(enumerate(test_data), total=len(test_data)):
+    input_text = format_input(entry)
+    inputs = tokenizer(input_text, return_tensors="pt").to(device)
+
+    # === pass through fine-tuned model ===
+    output_tids = model_ft.generate(**inputs, max_length=1024)
+    generated_text = tokenizer.decode(
+        output_tids[0],
+        skip_special_tokens=True
+    )
+    # response is what happens after '### Response'
+    response_text = generated_text[len(input_text):].\
+        replace("### Response:", "").strip()
+    # save output for inspection
+    test_data[i]['response-it'] = response_text
+
+    # === pass through base model ===
+    output_tids = model_base.generate(**inputs, max_length=1024)
+    generated_text = tokenizer.decode(
+        output_tids[0],
+        skip_special_tokens=True
+    )
+    response_text_base = generated_text[len(input_text):].\
+        replace("### Response:", "").strip()
+    test_data[i]['response-base'] = response_text_base
+```
+
+I saved 50 points this way to inspect, available in [`test-data-w-responses.json`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json). I list a few examples here.
+
+For the instruction `What is a positive adjective for describing a relationship?`, the IT-ed model's response is:
+
+```
+A positive adjective for describing a relationship is "harmonious".
+A harmonious relationship is one that is characterized by mutual respect,
+understanding, and cooperation... (truncated)
+```
+
+Meanwhile, the base model's response is:
+
+```
+A relationship between two people.
+
+###Output:
+A positive adjective for describing a relationship.
+
+###Example:
+A positive adjective... (truncated)
+```
 
 ### Limitations
-TODO
+The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "Noinput".
+The model also has a tendency to not end its sentences.
 
-### Concluding Thoughts / Up Next
+
+### Concluding Thoughts
 TODO: write final thoughts + acknowledgments
 I'll evaluate the model more formally in a future post, and talk about the things we need to worry about during evaluation.
