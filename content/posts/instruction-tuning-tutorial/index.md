@@ -78,7 +78,7 @@ def format_input(entry):
     return instruction_text + input_text
 ```
 
-Before tokenizing the text, the `### Response` part is also appended to the string outside of this function, after which, we want the model to finish the sentence. For a full implementation, see the `InstructionDataset` class in [data.py](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/0745c64689b1334485b0b525264366361c9f5d7d/scripts/data.py#L5C7-L5C25).
+Before tokenizing the text, the `### Response` part is also appended to the string outside of this function, after which, we want the model to finish the sentence. For a full implementation, see the `InstructionDataset` class in [`data.py`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/0745c64689b1334485b0b525264366361c9f5d7d/scripts/data.py#L5C7-L5C25).
 
 Here's the function I use to load and prepare train-test splits for this exercise.
 For the following fine-tuning task, I combine the Alpaca dataset with the [`instruction-data.json`](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/instruction-data.json) file from Raschka's repo.
@@ -207,7 +207,7 @@ While I enjoyed the exercise of writing the whole training loop and data collati
 This allows quicker experimentation, quick integration of LoRA , and less debugging overall.
 Additionally, since IT doesn't have any additional magic as we've learnt, I could just use HuggingFace's [`DataCollatorForLanguageModeling`](https://huggingface.co/docs/transformers/v4.46.2/en/main_classes/data_collator#transformers.DataCollatorForLanguageModeling), which can be easily plugged into the `Trainer`.
 
-The full script can be found in [finetune.py](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/main/scripts/finetune.py), but I'll share the important components here. You load the Gemma model as usual, and then do some additional work to make it work with LoRA---all of which has been packaged into the `setup_lora_model` function below:
+The full script can be found in [`finetune.py`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/main/scripts/finetune.py), but I'll share the important components here. You load the Gemma model as usual, and then do some additional work to make it work with LoRA---all of which has been packaged into the `setup_lora_model` function below:
 
 ```
 from transformers import AutoModelForCausalLM
@@ -308,7 +308,7 @@ python finetune.py \
 A full log of the run on Weights & Biases can be seen [here](https://wandb.ai/muhammadali/instruction-tuning/runs/50d2phap).
 The final model is available on HuggingFace [here](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca).
 
-### Qualitative Evaluation
+## Qualitative Evaluation
 After fine-tuning the model, it's important to see if we have improved anything beyond the Gemma base model.
 It is common practice in such training runs to inspect a few examples by eye and qualitatively understand how we've changed the model.
 For better or worse, this has also come to be known as ["vibes-based evaluation"](https://www.interconnects.ai/p/the-interface-era-of-ai); but in principle, looking at your model's outputs is always a good idea.
@@ -353,12 +353,12 @@ for i, entry in tqdm(enumerate(test_data), total=len(test_data)):
 
 I saved 50 points this way to inspect, available in [`test-data-w-responses.json`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json). I list a few examples here.
 
-For the instruction `What is a positive adjective for describing a relationship?`, the IT-ed model's response is:
+For example, for the input *"What is a positive adjective for describing a relationship?"*, the instrunction tuned model's response is:
 
 ```
 A positive adjective for describing a relationship is "harmonious".
 A harmonious relationship is one that is characterized by mutual respect,
-understanding, and cooperation... (truncated)
+understanding, and cooperation... [truncated]
 ```
 
 Meanwhile, the base model's response is:
@@ -370,14 +370,44 @@ A relationship between two people.
 A positive adjective for describing a relationship.
 
 ###Example:
-A positive adjective... (truncated)
+A positive adjective for describing a relationship is "sweet".
+
+###Example:
+A positive adjective for describing a relationship is "kind"... [truncated]
 ```
 
-### Limitations
-The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "Noinput".
+It's pretty clear that the IT-ed model is able to respond in the way that we have come to expect of modern chatbots---even though it is more verbose than we might want it to be. The ground truth for this in the test data is `A positive adjective for describing a relationship is harmonious.`, so the IT-ed model got the answer right, but then went off on a tangent.
+Meanwhile, the base model starts listing a series of examples: it over-uses the `###Example` header and repeats itself in listing examples of answers. It does provide adjectives, which was the ask, but not necessarily in a helpful or succinct way that responds directly to the request.
+
+In another case, for the input *Recommend a tool for creating visual timelines*, my instruction-tuned model responds with:
+
+```
+A great tool for creating visual timelines is TimelineJS. It is an open-source JavaScript library that allows you to create interactive timelines with ease. It is easy to use and has a wide range of features... [truncated] 
+```
+
+The base model, in this case, answers:
+
+```
+The user wants to create a visual timeline.
+
+###Output:
+The user should use the Timeline tool.
+
+###Example:
+The user should use the Timeline tool.
+
+###Explanation:
+The Timeline tool is a tool that allows the user to create a visual timeline. The user can add events, dates, and other information to the timeline. The Timeline tool is a useful tool for creating visual timelines.
+```
+
+The ground truth for this specific input was `One of the best tools for creating visual timelines is Canva, which makes it easy to create timelines with images, text, and interactive elements.` The IT-ed model responds quite clearly with a different tool (TimelineJS) which might not be suitable for non-programmers. It remains verbose though, and goes off on a bit of a marketing pitch for the tool. However, the model's response is exactly what was asked for. The base model completely fail to understands the task, and speaks superficially of some Timeline tool, without being helpful at all.
+
+## Limitations
+The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "noinput".
 The model also has a tendency to not end its sentences.
+I have also not implemented anything clever at inference time. The default sampling method for decoding is used, and this might be responsible for some of the quirks I highlight above.
 
 
-### Concluding Thoughts
+## Concluding Thoughts
 TODO: write final thoughts + acknowledgments
 I'll evaluate the model more formally in a future post, and talk about the things we need to worry about during evaluation.
