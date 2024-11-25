@@ -1,13 +1,13 @@
 ---
 title: "Getting the Hang of Instruction Tuning"
-date: 2024-11-17
+date: 2024-11-24
 draft: true
 hideToc: false
 summary: "A hands-on programming tutorial of instruction tuning. This enables us to take a base Gemma 2B model and fine-tune it on Alpaca dataset to follow user instructions."
 tags: [language models, tutorial]
 ---
 
-**Note**: The resulting model from this exercise is available on the [HuggingFace Model Hub](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca). All code discussed in this post lives in [this repository](https://github.com/mohummedalee/instruction-tuning-gemma-2b/), and this Lightning AI [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code).
+***Note**: The resulting model from this exercise is available on the [HuggingFace Model Hub](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca). All code discussed in this post lives in [this repository](https://github.com/mohummedalee/instruction-tuning-gemma-2b/), and this Lightning AI [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code).*
 
 I've been meaning to seriously dig into instruction tuning (IT) of language models for quite some time.
 To me, it's the step in the model building pipeline that is the closest to alchemy.
@@ -312,7 +312,7 @@ The final model is available on HuggingFace [here](https://huggingface.co/lukshm
 After fine-tuning the model, it's important to see if we have improved anything beyond the Gemma base model.
 It is common practice in such training runs to inspect a few examples by eye and qualitatively understand how we've changed the model.
 For better or worse, this has also come to be known as ["vibes-based evaluation"](https://www.interconnects.ai/p/the-interface-era-of-ai); but in principle, looking at your model's outputs is always a good idea.
-We can inspect the model's outputs on the `test_dataset` split we prepared earlier:
+We can inspect the model's outputs on the `test_dataset` split we prepared earlier, and compare them to the same model without instruction-tuning:
 
 ```
 from tqdm.auto import tqdm
@@ -351,9 +351,9 @@ for i, entry in tqdm(enumerate(test_data), total=len(test_data)):
     test_data[i]['response-base'] = response_text_base
 ```
 
-I saved 50 points this way to inspect, available in [`test-data-w-responses.json`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json). I list a few examples here.
+I saved 50 points this way to inspect, available in [`test-data-w-responses.json`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json). A few of my favorite wins are listed here.
 
-For example, for the input *"What is a positive adjective for describing a relationship?"*, the instrunction tuned model's response is:
+For the input `What is a positive adjective for describing a relationship?`, the instruction-tuned model's response is:
 
 ```
 A positive adjective for describing a relationship is "harmonious".
@@ -376,10 +376,10 @@ A positive adjective for describing a relationship is "sweet".
 A positive adjective for describing a relationship is "kind"... [truncated]
 ```
 
-It's pretty clear that the IT-ed model is able to respond in the way that we have come to expect of modern chatbots---even though it is more verbose than we might want it to be. The ground truth for this in the test data is `A positive adjective for describing a relationship is harmonious.`, so the IT-ed model got the answer right, but then went off on a tangent.
+It's pretty clear that the IT-ed model is able to respond in the way that we have come to expect of modern chatbots---even though it is more verbose than we might want it to be. The ground truth for this in the test data is `A positive adjective for describing a relationship is harmonious`, so the IT-ed model got the answer right, but then went off on a tangent.
 Meanwhile, the base model starts listing a series of examples: it over-uses the `###Example` header and repeats itself in listing examples of answers. It does provide adjectives, which was the ask, but not necessarily in a helpful or succinct way that responds directly to the request.
 
-In another case, for the input *Recommend a tool for creating visual timelines*, my instruction-tuned model responds with:
+In another case, for the input `Recommend a tool for creating visual timelines`, our instruction-tuned model responds with:
 
 ```
 A great tool for creating visual timelines is TimelineJS. It is an open-source JavaScript library that allows you to create interactive timelines with ease. It is easy to use and has a wide range of features... [truncated] 
@@ -400,12 +400,47 @@ The user should use the Timeline tool.
 The Timeline tool is a tool that allows the user to create a visual timeline. The user can add events, dates, and other information to the timeline. The Timeline tool is a useful tool for creating visual timelines.
 ```
 
-The ground truth for this specific input was `One of the best tools for creating visual timelines is Canva, which makes it easy to create timelines with images, text, and interactive elements.` The IT-ed model responds quite clearly with a different tool (TimelineJS) which might not be suitable for non-programmers. It remains verbose though, and goes off on a bit of a marketing pitch for the tool. However, the model's response is exactly what was asked for. The base model completely fail to understands the task, and speaks superficially of some Timeline tool, without being helpful at all.
+The ground truth for this specific input was `One of the best tools for creating visual timelines is Canva, which makes it easy to create timelines with images, text, and interactive elements.` The IT-ed model responds quite clearly with a different tool (TimelineJS) which might not be suitable for non-programmers. It remains verbose though, and goes off on a bit of a marketing pitch for the tool. However, the model's response is a tool, precisely what was asked for. In comparison, the base model completely fail to understands the task, and speaks superficially of some Timeline tool, without being helpful at all. This is one of those inputs where the IT really shows.
 
-## Limitations
-The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "noinput".
-The model also has a tendency to not end its sentences.
-I have also not implemented anything clever at inference time. The default sampling method for decoding is used, and this might be responsible for some of the quirks I highlight above.
+One last example: for another instruction `Create an interesting appetizer using these ingredients`, which also includes an `input`: `Lemon, Artichoke Hearts, Pesto`, the ground truth in the dataset states:
+
+```
+An interesting appetizer could be artichoke pesto crostini. To make it, slice some baguette into thin pieces and brush each piece with a mixture of olive oil and freshly squeezed lemon juice. Then top with a dollop of homemade pesto and a slice of canned artichoke heart. Toast in the oven until the crust is golden brown and the pesto is hot and bubbly.
+```
+
+Pretty delicious and well-written recipe. Compare this to our instruction tuned model:
+
+```
+Lemon Artichoke Hearts Pesto Bites are a delicious appetizer made with lemon, artichoke hearts, and pesto. Simply mix the ingredients together and form into bite-sized balls. Bake for 15 minutes at 350 degrees Fahrenheit and enjoy! These bites are perfect for a party or a quick snack. They are sure to be a hit! 
+#instruction #response #appetizer #lemon... [truncated]
+```
+
+The recipe does use the provided ingredients, which is good. However, in terms of helpfulness, it largely like a semi-hallucination; it isn't possible to turn any set of ingredient mash into a bite-sized ball without anything to hold it together.
+
+The base model's response, in contrast:
+```
+, Goat Cheese, Olive Oil, Garlic, Parmesan Cheese, Bread
+
+###Output:
+A delicious appetizer that is easy to make and will impress your guests.
+
+###Instruction: Create a delicious main course using these ingredients.
+
+###Input:
+Chicken, Potatoes, Carrots, Onions, Garlic, Olive Oil, Butter, Salt, Pepper
+
+###Output:
+A hearty and flavorful main course that will satisfy your guests... [truncated]
+```
+
+I like this example because it shows so clearly the base model's tendency to just complete sentences. It continues the list of ingredients with more ingredients, and only then starts a new header with `### Output` and provides a superficial recipe later. It then completely abandons this context in the next `### Instruction`, and provides a brand new set of ingredients.
+
+These examples illustrate how IT changes the behavior of the model to make it act more helpful, respond more directly to requests, and take user inputs into account. You can see more examples in the [output file](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json) in the repo; there are even cases where the IT model does worse, surpriginly.
+
+#### Limitations
+The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "noinput", go off on tangents, do math poorly, and make up hallucinations of absurd things. I haven't experimented with hyperparameter tuning and am simply reporting a one-off experiment for the sake of exposition. I imagine a different combination of hyperparameters, or a more clever decoding approach could reduce these unhelpful behaviors.
+
+These qualitative examples also don't put concrete numbers on the performance to precisely compare with the base model. For that, we have to either run this through a benchmark that measures instruction-following capability, or use some survey approach to quantify the performance for each test datapoint---things that I hope to cover in a future post.
 
 
 ## Concluding Thoughts
