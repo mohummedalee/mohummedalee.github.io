@@ -1,9 +1,9 @@
 ---
 title: "Getting the Hang of Instruction Tuning"
-date: 2024-11-24
-draft: true
+date: 2024-11-25
+draft: false
 hideToc: false
-summary: "A hands-on programming tutorial of instruction tuning. This enables us to take a base Gemma 2B model and fine-tune it on Alpaca dataset to follow user instructions."
+summary: "A hands-on programming tutorial of instruction tuning: I take a base Gemma 2B model and fine-tune it on the Alpaca dataset on a small GPU; this enables the model to follow user instructions."
 tags: [language models, tutorial]
 ---
 
@@ -64,7 +64,7 @@ Twitter, Instagram, Telegram
 Telegram
 ```
 
-A quick function to get this formatting for each point, taken from Raschka's book:
+**Formatting inputs.** A quick function to get this formatting for each point, taken from Raschka's book:
 
 ```
 def format_input(entry):    
@@ -80,8 +80,7 @@ def format_input(entry):
 
 Before tokenizing the text, the `### Response` part is also appended to the string outside of this function, after which, we want the model to finish the sentence. For a full implementation, see the `InstructionDataset` class in [`data.py`](https://github.com/mohummedalee/instruction-tuning-gemma-2b/blob/0745c64689b1334485b0b525264366361c9f5d7d/scripts/data.py#L5C7-L5C25).
 
-Here's the function I use to load and prepare train-test splits for this exercise.
-For the following fine-tuning task, I combine the Alpaca dataset with the [`instruction-data.json`](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/instruction-data.json) file from Raschka's repo.
+**Splitting the dataset.** For this post, I combine the Alpaca dataset with the [`instruction-data.json`](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/instruction-data.json) file from Raschka's repo. Here's the function I use to load and prepare train-test splits for this exercise:
 
 ```
 import json
@@ -199,7 +198,7 @@ def custom_collate_fn(
 So if the instruction-reponse sentence from the training data was just five tokens `[0, 1, 2, 3, 4]`; the `input_tensor` would be the sentence minus the first token `[1, 2, 3, 4]`, and the `output_tensor` would be one token ahead for each index `[2, 3, 4, <endoftext>]`.
 This is how all causal language modeling fine-tuning for any type of domain adaptation happens.
 I somehow expected IT to have some additional magic, but it seems that it really doesn't---except for the cleverly designed dataset.
-The remainder of the [notebook]((https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb)) is largely an exposition of setting up the dataset, dataloader, and using a custom training loop to do the fine-tuning.
+The remainder of the [notebook](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) is largely an exposition of setting up the dataset, dataloader, and using a custom training loop to do the fine-tuning.
 
 
 ### Implementing with HuggingFace Trainer
@@ -400,7 +399,7 @@ The user should use the Timeline tool.
 The Timeline tool is a tool that allows the user to create a visual timeline. The user can add events, dates, and other information to the timeline. The Timeline tool is a useful tool for creating visual timelines.
 ```
 
-The ground truth for this specific input was `One of the best tools for creating visual timelines is Canva, which makes it easy to create timelines with images, text, and interactive elements.` The IT-ed model responds quite clearly with a different tool (TimelineJS) which might not be suitable for non-programmers. It remains verbose though, and goes off on a bit of a marketing pitch for the tool. However, the model's response is a tool, precisely what was asked for. In comparison, the base model completely fail to understands the task, and speaks superficially of some Timeline tool, without being helpful at all. This is one of those inputs where the IT really shows.
+The ground truth for this specific input was `One of the best tools for creating visual timelines is Canva, which makes it easy to create timelines with images, text, and interactive elements.` The IT-ed model responds quite clearly with a different tool (TimelineJS) which might not be suitable for non-programmers. It remains verbose though, and goes off on a bit of a marketing pitch for the tool. However, the model's response is a tool, precisely what was asked for. In comparison, the base model completely fails to understands the task, and speaks superficially of some Timeline tool, without being helpful at all. This is one of those inputs where the IT really shows.
 
 One last example: for another instruction `Create an interesting appetizer using these ingredients`, which also includes an `input`: `Lemon, Artichoke Hearts, Pesto`, the ground truth in the dataset states:
 
@@ -408,7 +407,7 @@ One last example: for another instruction `Create an interesting appetizer using
 An interesting appetizer could be artichoke pesto crostini. To make it, slice some baguette into thin pieces and brush each piece with a mixture of olive oil and freshly squeezed lemon juice. Then top with a dollop of homemade pesto and a slice of canned artichoke heart. Toast in the oven until the crust is golden brown and the pesto is hot and bubbly.
 ```
 
-Pretty delicious and well-written recipe. Compare this to our instruction tuned model:
+Pretty delicious and well-written recipe. Compare this to our instruction tuned model's response:
 
 ```
 Lemon Artichoke Hearts Pesto Bites are a delicious appetizer made with lemon, artichoke hearts, and pesto. Simply mix the ingredients together and form into bite-sized balls. Bake for 15 minutes at 350 degrees Fahrenheit and enjoy! These bites are perfect for a party or a quick snack. They are sure to be a hit! 
@@ -424,7 +423,8 @@ The base model's response, in contrast:
 ###Output:
 A delicious appetizer that is easy to make and will impress your guests.
 
-###Instruction: Create a delicious main course using these ingredients.
+###Instruction:
+Create a delicious main course using these ingredients.
 
 ###Input:
 Chicken, Potatoes, Carrots, Onions, Garlic, Olive Oil, Butter, Salt, Pepper
@@ -438,11 +438,17 @@ I like this example because it shows so clearly the base model's tendency to jus
 These examples illustrate how IT changes the behavior of the model to make it act more helpful, respond more directly to requests, and take user inputs into account. You can see more examples in the [output file](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json) in the repo; there are even cases where the IT model does worse, surpriginly.
 
 #### Limitations
-The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "noinput", go off on tangents, do math poorly, and make up hallucinations of absurd things. I haven't experimented with hyperparameter tuning and am simply reporting a one-off experiment for the sake of exposition. I imagine a different combination of hyperparameters, or a more clever decoding approach could reduce these unhelpful behaviors.
+The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "noinput", go off on tangents, do math poorly, and make up hallucinations of absurd things. I haven't experimented with hyperparameter tuning and am simply reporting a one-off experiment for the sake of exposition. I imagine a different combination of hyperparameters, a full fine-tune, or a more clever decoding approach could reduce these unhelpful behaviors.
 
 These qualitative examples also don't put concrete numbers on the performance to precisely compare with the base model. For that, we have to either run this through a benchmark that measures instruction-following capability, or use some survey approach to quantify the performance for each test datapoint---things that I hope to cover in a future post.
 
 
 ## Concluding Thoughts
-TODO: write final thoughts + acknowledgments
-I'll evaluate the model more formally in a future post, and talk about the things we need to worry about during evaluation.
+In this post, I went over my implementation of instruction tuning (IT); I showed how IT enables a Gemma 2B model to follow user prompts.
+I largely followed [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) of Sebastian Raschka's [book](https://www.manning.com/books/build-a-large-language-model-from-scratch), and made some gentle modifications to make the whole setup work with a larger model and HuggingFace's built-in training tools. All work is done on a small A10 GPU with 24GiB of VRAM. Qualitatively inspecting some examples from the test set, we saw how IT allows the model to respond more directly to the request than the base Gemma 2B model. The final model is available on HuggingFace as [`lukshmichowk/gemma-2b-it-alpaca`](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca).
+
+I was mostly driven to write about this because of the simplicity of the method. When I started looking into instruction-tuning, I did not anticipate that it is simply a fine-tune with cross entropy loss on next token prediction, yet that is exactly what it is. Going through the from-scratch implementation also 
+The high utility of IT largely lies in the datasets and their clever design---which are often closed source.
+In the future, I hope to do a more rigorous, quantitative evaluation of the model.
+
+I hope if you read this, you found the exercise useful. If you find any errors, or have feedback, please reach out to me via the email listed in my CV.
