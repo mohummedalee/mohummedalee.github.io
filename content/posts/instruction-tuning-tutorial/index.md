@@ -16,7 +16,7 @@ You take a model whose job is simply predicting the next token, and convert it t
 
 Once you start playing with LLMs, you quickly realize that not all models respond equally well, or at all, to prompts.
 For example, practitioners often know, and literature ([Sannigrahi et. al., 2024](https://arxiv.org/abs/2406.06729)) has shown, that OpenAI's now deprecated `babbage-002` model wasn't helpful for many tasks, regardless of the cleverness of your prompt. This happens mainly because the model had not gone through an instruction tuning phase.
-Given the near-universal impact IT has had on LLMs, I decided to pop under the hood of how it works, and fine-tune a model on instruction data myself.
+Given the near-universal impact IT has had on LLMs, I decided to pop under the hood of how it works, and fine-tune a model on instruction data myself. In this post, I show the code to fine-tune 
 
 ## Programming instruction tuning from scratch
 Lucky for me, [Sebastian Raschka](https://sebastianraschka.com) has been putting out incredible teaching content to lay out all the gory details of building LLMs. I learnt all of the things in this post by following along [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07) of his new book, [Build a Large Language Model (From Scratch)](https://www.manning.com/books/build-a-large-language-model-from-scratch).
@@ -34,7 +34,7 @@ This allowed me to fit the whole job on a single A10G GPU.
 To teach a model to follow instructions, you first need a dataset of high-quality, ideally human-written instructions.
 Each of these instructions---like all supervised training data---has a clear input $x$ and output $y$; for IT purposes, these are called instructions and responses.
 Unfortunately, most instruction datasets, especially for large commercial models, tend to be proprietary.
-InstructGPT ([Ouyang et. al., 2022](https://arxiv.org/abs/2203.02155))---in many ways the ChatGPT technical report---never released the instruction data (among everything else). Figure 2 of the paper clearly illustrates how laborious the process of collecting instruction and response pairs can be, and requires attentive human labor (Step 1).
+InstructGPT ([Ouyang et. al., 2022](https://arxiv.org/abs/2203.02155))---in many ways the ChatGPT technical report---never released the instruction data (among everything else). Figure 2 of the paper clearly illustrates how laborious the process of collecting instruction and response pairs can be, and requires attentive human labor.
 
 Many commercial models continue to keep their instruction datasets closed, so a lot of academic and experimental work has to rely on synthetic data generated through distillation from models that have been instruction-tuned ([Zhang et. al., 2024](https://arxiv.org/abs/2308.10792)). There are some exceptions: [Dolly](https://github.com/databrickslabs/dolly), for instance, is a human-written and open-source instruction dataset put together by Databricks employees.
 
@@ -445,10 +445,8 @@ These qualitative examples also don't put concrete numbers on the performance to
 
 ## Concluding Thoughts
 In this post, I went over my implementation of instruction tuning (IT); I showed how IT enables a Gemma 2B model to follow user prompts.
-I largely followed [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) of Sebastian Raschka's [book](https://www.manning.com/books/build-a-large-language-model-from-scratch), and made some gentle modifications to make the whole setup work with a larger model and HuggingFace's built-in training tools. All work is done on a small A10 GPU with 24GiB of VRAM. Qualitatively inspecting some examples from the test set, we saw how IT allows the model to respond more directly to the request than the base Gemma 2B model. The final model is available on HuggingFace as [`lukshmichowk/gemma-2b-it-alpaca`](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca).
+I largely followed [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) of Sebastian Raschka's [book](https://www.manning.com/books/build-a-large-language-model-from-scratch), and made some gentle modifications to make the whole setup work with a larger model and HuggingFace's built-in training tools. All work is done on a small A10 GPU with 24GiB of VRAM. Qualitatively inspecting some examples from the test set, we saw how IT allows the model to respond more directly to requests than the base Gemma 2B model. The final model is available on HuggingFace as [`lukshmichowk/gemma-2b-it-alpaca`](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca).
 
-I was mostly driven to write about this because of the simplicity of the method. When I started looking into instruction-tuning, I did not anticipate that it is simply a fine-tune with cross entropy loss on next token prediction, yet that is exactly what it is. Going through the from-scratch implementation also 
-The high utility of IT largely lies in the datasets and their clever design---which are often closed source.
-In the future, I hope to do a more rigorous, quantitative evaluation of the model.
+I was mostly driven to write about this because of the simplicity of the method. When I started looking into instruction-tuning, I did not anticipate that it is simply a fine-tune with cross entropy loss on next token prediction, yet that is exactly what it is. The outsized utility of IT largely lies in the fine-tuning datasets and their clever design---which are unfortunately often closed source.
 
 I hope if you read this, you found the exercise useful. If you find any errors, or have feedback, please reach out to me via the email listed in my CV.

@@ -20,9 +20,9 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
         # Limit:        If the files should be listed, how many should be shown.
     menu = [        
         {Name = "Publications", URL = "/publications/", HasChildren = false},
-        {Name = "Blog", URL = "/posts/", HasChildren = false},
+        # {Name = "Blog", URL = "/posts/", HasChildren = false},
         {Name = "About", URL = "/about/", HasChildren = false},        
-        # {Name = "Blog", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},        
+        {Name = "Blog", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 3},        
     ]
 
     # front_page_content = ["about", "posts"]
@@ -42,7 +42,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     # matrix_url = "https://matrix.org"
     # telegram_url = "https://telegram.org"
     # tryhackme_url = "https://tryhackme.com"
-    twitter_url = "https://twitter.com/lukshmichowk"
+    # twitter_url = "https://twitter.com/lukshmichowk"
     # xmpp_url = "https://xmpp.org"
     # youtube_url = "https://youtube.com"
 

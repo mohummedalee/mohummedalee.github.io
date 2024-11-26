@@ -2,13 +2,13 @@
 layout: single
 ---
 
-I am a data scientist and researcher based in Cambridge, MA.
-I have a PhD in computer science, with research in data science and human-computer interaction.
+👋🏽 My name is Ali and I'm a data scientist and researcher based in Boston.
+I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award. My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction.
 I enjoy using technical tools to understand and solve human problems.
 
-I currently work for Apple, focusing on Responsible AI in Apple [Services](https://www.apple.com/services/).
+I currently work for Apple as a Research Scientist, focusing on Responsible AI in Apple [Services](https://www.apple.com/services/): I build datasets and set up evaluations to ensure machine learning-based features are safe for users. I've previously worked at places like Intel, Oracle and the Max Planck Institute.
 
-<!-- This site hosts a portfolio and a blog. -->
+If you'd like to collaborate on a data science/applied machine learning software or research project, please feel free to reach out.
 
 ### Selected Papers
 
@@ -25,7 +25,7 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
     - IC2S2 '24, '23    
     - TheWebConf '23
     - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '24, '23    
-    - Responsible Generative AI Workshop (ReGenAI) @ CVPR '24
+    - Responsible Generative AI (ReGenAI) @ CVPR '24
 * **External Reviewing:**
     - CHI '25
     - ICWSM '25
