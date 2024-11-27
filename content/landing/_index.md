@@ -2,13 +2,13 @@
 layout: single
 ---
 
-👋🏽 My name is Ali and I'm a data scientist and researcher based in Boston.
-I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award. My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction.
-I enjoy using technical tools to understand and solve human problems.
+👋🏽 I'm a data scientist and researcher based in Boston.
+My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction; I enjoy using technical tools to understand and solve human problems.
+I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
-I currently work for Apple as a Research Scientist, focusing on Responsible AI in Apple [Services](https://www.apple.com/services/): I build datasets and set up evaluations to ensure machine learning-based features are safe for users. I've previously worked at places like Intel, Oracle and the Max Planck Institute.
+I currently work for Apple as a Research Scientist, focusing on Responsible AI in [Apple Services](https://www.apple.com/services/)---I build datasets and set up evaluations to ensure upcoming AI/ML features are safe for users.
 
-If you'd like to collaborate on a data science/applied machine learning software or research project, please feel free to reach out.
+I've previously worked at places like Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a data science/applied machine learning software or research project, please feel free to reach out.
 
 ### Selected Papers
 
