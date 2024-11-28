@@ -4,7 +4,7 @@ layout: single
 
 👋🏽 I'm a data scientist and researcher based in Boston.
 My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction; I enjoy using technical tools to understand and solve human problems.
-I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
+I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/~mali/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
 I currently work for Apple as a Research Scientist, focusing on Responsible AI in [Apple Services](https://www.apple.com/services/)---I build datasets and set up evaluations to ensure upcoming AI/ML features are safe for users.
 
