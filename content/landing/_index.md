@@ -8,7 +8,7 @@ I have a PhD in computer science from [Northeastern](https://www.khoury.northeas
 
 I currently work for Apple as a Research Scientist, focusing on Responsible AI in [Apple Services](https://www.apple.com/services/)---I build datasets and set up evaluations to ensure upcoming AI/ML features are safe for users.
 
-I've previously worked at places like Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a data science/applied machine learning software or research project, please feel free to reach out.
+I've previously worked at places like Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please do reach out.
 
 ### Selected Papers
 
@@ -32,7 +32,7 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
     - NeurIPS '24, '23, '21 (ethics reviewer)        
     - ML4H '24, '23
     - CSCW '23, '21, '20
-    - PETS '22    
+    - PETS '22
     - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24        
 
 <!-- ### Teaching
