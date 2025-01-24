@@ -11,7 +11,7 @@ Also see: [Google Scholar](https://scholar.google.com/citations?user=pLeu3X0AAAA
 [P] [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf) Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv_, Jul 2024.
 [[bibtex]](/bibtex/arxiv24-bert.bib), [[arXiv]](https://arxiv.org/abs/2407.21058)
 
-[C] [Problematic Advertising and its Disparate Exposure on Facebook](/papers/usenixsecurity23-ali.pdf) Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023. [[bibtex]](/bibtex/usenix23.bib), [[arXiv]](https://arxiv.org/abs/2306.06052)
+[C] [Problematic Advertising and its Disparate Exposure on Facebook](/papers/usenixsecurity23-ali.pdf) Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023. [[talk]](https://www.youtube.com/watch?v=vKu3GM2ulR0&t=1s), [[bibtex]](/bibtex/usenix23.bib), [[arXiv]](https://arxiv.org/abs/2306.06052)
 
 [W] [All Things Unequal: Measuring Disparity of Potentially Harmful Ads on Facebook](/papers/ali-conpro22.pdf) Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _Workshop on Technology and Consumer Protection (ConPro) 2022
 at IEEE S&P_, San Francisco, CA, May 2022. [[bibtex]](/bibtex/conpro22.bib)
@@ -23,7 +23,7 @@ at IEEE S&P_, San Francisco, CA, May 2022. [[bibtex]](/bibtex/conpro22.bib)
 ✨ Press  📰 : [Washington Post](https://www.washingtonpost.com/technology/2019/12/10/facebooks-ad-delivery-system-drives-partisanship-even-if-campaigns-dont-want-it-new-research-shows/), [WIRED](https://www.wired.com/story/facebook-political-ad-system-designed-polarize/), [New Scientist](https://institutions.newscientist.com/article/2227041-facebook-charges-more-for-ads-that-aim-to-cross-the-political-divide/)
 
 [C] [Discrimination through optimization: How Facebook's ad delivery can lead to skewed outcomes](/papers/disc-through-opt.pdf) Muhammad Ali*, Piotr Sapiezynski*, Miranda Bogen, Aleksandra Korolova, Alan Mislove, Aaron Rieke.
-Proceedings of the _ACM Conference on Computer Supported Cooperative Work (CSCW '19)_, Austin, TX, USA, November 2019. [[bibtex]](/bibtex/cscw19.bib)
+Proceedings of the _ACM Conference on Computer Supported Cooperative Work (CSCW '19)_, Austin, TX, USA, November 2019. [[talk]](https://www.youtube.com/watch?v=g_Wbsp0xwj8&list=PLe9OiCB0A0s1QXvZVuupv5zGSseSb358q), [[bibtex]](/bibtex/cscw19.bib)
 
 ✨ Recognition 🏅: [Diversty & Inclusion Award](https://medium.com/acm-cscw/cscw-2019-diversity-inclusion-awards-and-lunch-5261204f264f), [Honorable Mention](https://programs.sigchi.org/cscw/2019/awards/honorable-mentions)
 
