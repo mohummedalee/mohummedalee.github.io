@@ -36,8 +36,8 @@ Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezyn
     - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24        
 
 ### Speaking
-* **Colorado Governor's Office of Information Techology**: "Understanding and Anticipating the Failures of Modern AI Systems". Webinar, January 15, 2025. [[Slides]](https://docs.google.com/presentation/d/1C8VRlCa0Qew0AY15ooBfdsYBpcd-Z01ZyK_KrMfRBas/edit?usp=sharing)
-* **PBS NOVA Science Café**: "Algorithmic Bias: A Case Study of Facebook Ads". Boston Public Library, Boston, MA,  May 28, 2019. [[Talk]](https://www.youtube.com/watch?v=g_Wbsp0xwj8)
+* **Colorado Governor's Office of Information Techology**: *Understanding and Anticipating the Failures of Modern AI Systems*. Online webinar, January 15, 2025. [[Slides]](https://docs.google.com/presentation/d/1C8VRlCa0Qew0AY15ooBfdsYBpcd-Z01ZyK_KrMfRBas/edit?usp=sharing)
+* **PBS NOVA Science Café**: *Algorithmic Bias: A Case Study of Facebook Ads*. Boston Public Library,  May 28, 2019. [[Talk]](https://www.youtube.com/watch?v=g_Wbsp0xwj8)
 
 <!-- ### Teaching
 * Lecturer, **CY 2550: Introduction to Cybersecurity**, Northeastern University, Summer II 2023
