@@ -6,9 +6,9 @@ layout: single
 My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction; I enjoy using technical tools to understand and solve human problems.
 I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/~mali/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
-I currently work for Apple as a Research Scientist, focusing on Responsible AI in [Apple Services](https://www.apple.com/services/)---I build datasets and set up evaluations to ensure upcoming AI/ML features are safe for users.
+I currently work at Amazon as an Applied Scientist in the [Internal Audit](https://amazon.jobs/content/en/teams/fgbs/internal-audit) organization, where I build machine learning tools to measure risk across a variety of Amazon's businesses.
 
-I've previously worked at places like Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please do reach out.
+I've previously worked at places like Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out.
 
 ### Selected Papers
 
