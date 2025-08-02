@@ -2,11 +2,11 @@
 layout: single
 ---
 
-👋🏽 I'm a data scientist and researcher based in Boston.
-My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction; I enjoy using technical tools to understand and solve human problems.
+👋🏽 I'm a data scientist and researcher based in Seattle.
+My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction. I enjoy building AI systems that are well-evaluated, robust, and solve real human problems.
 I have a PhD in computer science from [Northeastern](https://www.khoury.northeastern.edu/~mali/), where I was a recipient of an [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
-I currently work at Amazon as an Applied Scientist in the [Internal Audit](https://amazon.jobs/content/en/teams/fgbs/internal-audit) organization, where I build machine learning tools to measure risk across a variety of Amazon's businesses.
+I currently work at Amazon as an Applied Scientist in the [Internal Audit](https://amazon.jobs/content/en/teams/fgbs/internal-audit) organization, where I build ML/AI tools to measure risk across a variety of Amazon's businesses.
 
 I've previously worked at places like Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out.
 

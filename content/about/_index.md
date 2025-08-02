@@ -2,7 +2,6 @@
 title: About
 layout: single
 ---
-*November 27, 2024*
 
 ![a picture of Boston's Back Bay with the Charles River in the front](/images/boston.jpg)
 
@@ -21,7 +20,7 @@ My [PhD research](/papers/phd-thesis-mali.pdf) measured the biased outcomes of m
 This work was widely covered in the media ([Vox](https://www.youtube.com/watch?v=2wVPyiyukQc), [MIT Technology Review](https://www.technologyreview.com/s/613274/facebook-algorithm-discriminates-ai-bias/), [WIRED](https://www.wired.com/story/facebooks-ad-system-discrimination/)), and I had the opportunity to brief staff at the U.S. House of Representatives about our results. Meta later agreed to fix racial biases in their housing ad delivery as part of a [settlement](https://www.wired.com/story/facebooks-ad-system-discrimination/) with the U.S. Department of Justice.
 
 #### Personal
-I live in Cambridge, MA, with my wife and daugther. Previously, I've lived in [Saarbrücken, Germany](https://www.youtube.com/watch?v=OrtkqXzPG-c)---where I was a student at [Saarland University](https://www.uni-saarland.de/en/home.html), and a research assistant at the [Max Planck Institute for Software Systems](https://mpi-sws.org/). I am originally from [Lahore, Pakistan](https://youtu.be/N7kvo94PKN4?t=126). I am bilingual in Punjabi and Urdu, and speak just enough German to order a döner kebab. I enjoy reading, single player video games, tabla, and film photography.
+I live in Seattle, WA, with my wife and daugther. Previously, I've lived in Boston/Cambridge, MA---where I was a part of [Khoury College](https://www.khoury.northeastern.edu). In the more distant past, I lived in Saarbrücken, Germany---where I was a student at [Saarland University](https://www.uni-saarland.de/en/home.html), and a research assistant at the [Max Planck Institute for Software Systems](https://mpi-sws.org/). I am originally from [Lahore, Pakistan](https://youtu.be/N7kvo94PKN4?t=126). I am bilingual in Punjabi and Urdu, and speak just enough German to order a döner kebab. I enjoy reading, single player video games, tabla, and film photography.
 <!-- Back in Lahore, I used to be a backend engineer at a small music startup called [Patari](https://en.wikipedia.org/wiki/Patari_(service)). -->
 
 
@@ -32,3 +31,5 @@ frequently used tools like , Docker, AWS, SQL, among many others.
 **Tools** I used in this work frequently involved Python (, PyTorch, HuggingFace, networkx), JavaScript, SQL, R, Spark, and others. -->
 
 *Header: Boston's Back Bay as seen from Longfellow Bridge, shot on Kodak Gold 200.*
+
+Last updated: *August 1, 2025*
