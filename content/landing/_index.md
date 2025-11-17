@@ -12,32 +12,35 @@ I've previously worked at places like Apple, Intel, Oracle Labs and the Max Plan
 
 ### Selected Papers
 
-* [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf) Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv_, Jul 2024.
+- [Understanding the Interplay of Scale, Data, and Bias in Language Models: a Case Study with BERT](/papers/ali-2024-bert.pdf) Muhammad Ali, Swetasudha Panda, Qinlan Shen, Michael Wick, Ari Kobren. _arXiv_, Jul 2024.
 
-* [Problematic Advertising and its Disparate Exposure on Facebook.](/papers/usenixsecurity23-ali.pdf)
-Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023.
+- [Problematic Advertising and its Disparate Exposure on Facebook.](/papers/usenixsecurity23-ali.pdf)
+  Muhammad Ali, Angelica Goetzen, Alan Mislove, Elissa M. Redmiles, Piotr Sapiezynski. _USENIX Security Symposium_. Anaheim, CA, Aug 2023.
 
-* [Discrimination through Optimization: How Facebook's ad delivery can lead to skewed outcomes.](/papers/facebook-delivery-cscw.pdf) Muhammad Ali, Piotr Sapiezynski, Miranda Bogen, Aleksandra Korolova, Alan Mislove, Aaron Rieke. _ACM Conference on Computer Supported Cooperative Work (CSCW)_. Austin, TX, Nov 2019.
+- [Discrimination through Optimization: How Facebook's ad delivery can lead to skewed outcomes.](/papers/facebook-delivery-cscw.pdf) Muhammad Ali, Piotr Sapiezynski, Miranda Bogen, Aleksandra Korolova, Alan Mislove, Aaron Rieke. _ACM Conference on Computer Supported Cooperative Work (CSCW)_. Austin, TX, Nov 2019.
 
 ### Service
+
 - **Program Committees:**
-    - FAccT '24, '23, '22, '21
-    - IC2S2 '24, '23    
-    - TheWebConf '23
-    - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '24, '23    
-    - Responsible Generative AI (ReGenAI) @ CVPR '24
+  - FAccT '24, '23, '22, '21
+  - IC2S2 '24, '23
+  - TheWebConf '23
+  - Socially Responsible Language Modelling Research (SoLaR) @ NeurIPS '24, '23
+  - Responsible Generative AI (ReGenAI) @ CVPR '24
+
 * **External Reviewing:**
-    - CHI '25
-    - ICWSM '25
-    - NeurIPS '24, '23, '21 (ethics reviewer)        
-    - ML4H '24, '23
-    - CSCW '23, '21, '20
-    - PETS '22
-    - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24        
+  - CHI '25
+  - ICWSM '25
+  - NeurIPS '24, '23, '21
+  - ML4H '24, '23
+  - CSCW '23, '21, '20
+  - PETS '22
+  - Trustworthy Multi-modal Foundation Models and AI Agents (TiFA) @ ICML '24
 
 ### Speaking
-* **Colorado Governor's Office of Information Techology**: *Understanding and Anticipating the Failures of Modern AI Systems*. Online webinar, January 15, 2025. [[Slides]](https://docs.google.com/presentation/d/1C8VRlCa0Qew0AY15ooBfdsYBpcd-Z01ZyK_KrMfRBas/edit?usp=sharing)
-* **PBS NOVA Science Café**: *Algorithmic Bias: A Case Study of Facebook Ads*. Boston Public Library,  May 28, 2019. [[Talk]](https://www.youtube.com/watch?v=g_Wbsp0xwj8)
+
+- **Colorado Governor's Office of Information Techology**: _Understanding and Anticipating the Failures of Modern AI Systems_. Online webinar, January 15, 2025. [[Slides]](https://docs.google.com/presentation/d/1C8VRlCa0Qew0AY15ooBfdsYBpcd-Z01ZyK_KrMfRBas/edit?usp=sharing)
+- **PBS NOVA Science Café**: _Algorithmic Bias: A Case Study of Facebook Ads_. Boston Public Library, May 28, 2019. [[Talk]](https://www.youtube.com/watch?v=g_Wbsp0xwj8)
 
 <!-- ### Teaching
 * Lecturer, **CY 2550: Introduction to Cybersecurity**, Northeastern University, Summer II 2023

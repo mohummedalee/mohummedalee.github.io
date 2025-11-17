@@ -25,7 +25,7 @@
                         </li>
                         {{ range (first $menu_item.Limit .Pages) }}
                             <li class="bullet">
-                                <a href="{{ .Permalink }}">{{ .Title }}</a>
+                                <a href="{{ .Permalink }}" {{ if eq $.Permalink .Permalink }}class="active"{{ end }}>{{ .Title }}</a>
                             </li>
                         {{ end }}
                     {{ end }}

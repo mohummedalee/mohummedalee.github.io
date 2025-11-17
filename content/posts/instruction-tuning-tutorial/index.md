@@ -1,5 +1,5 @@
 ---
-title: "Getting the Hang of Instruction Tuning"
+title: "Getting the hang of instruction tuning"
 date: 2024-11-25
 draft: false
 hideToc: false
@@ -7,18 +7,19 @@ summary: "A hands-on programming tutorial of instruction tuning: I take a base G
 tags: [language models, tutorial]
 ---
 
-***Note**: The resulting model from this exercise is available on the [HuggingFace Model Hub](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca). All code discussed in this post lives in [this repository](https://github.com/mohummedalee/instruction-tuning-gemma-2b/), and this Lightning AI [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code).*
+**\*Note**: The resulting model from this exercise is available on the [HuggingFace Model Hub](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca). All code discussed in this post lives in [this repository](https://github.com/mohummedalee/instruction-tuning-gemma-2b/), and this Lightning AI [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code).\*
 
 I've been meaning to seriously dig into instruction tuning (IT) of language models for quite some time.
 To me, it's the step in the model building pipeline that is the closest to alchemy.
 It is also the step that arguably provides the largest delta in terms of the general user's utility.
-You take a model whose job is simply predicting the next token, and convert it to a useful tool that can follow user instructions, and can be "prompted" into doing things. 
+You take a model whose job is simply predicting the next token, and convert it to a useful tool that can follow user instructions, and can be "prompted" into doing things.
 
 Once you start playing with LLMs, you quickly realize that not all models respond equally well, or at all, to prompts.
 For example, practitioners often know, and literature ([Sannigrahi et. al., 2024](https://arxiv.org/abs/2406.06729)) has shown, that OpenAI's now deprecated `babbage-002` model wasn't helpful for many tasks, regardless of the cleverness of your prompt. This happens mainly because the model had not gone through an instruction tuning phase.
 Given the near-universal impact IT has had on LLMs, I decided to pop under the hood of how it works, and fine-tune a model on instruction data myself.
 
 ## Programming instruction tuning from scratch
+
 Lucky for me, [Sebastian Raschka](https://sebastianraschka.com) has been putting out incredible teaching content to lay out all the gory details of building LLMs. I learnt all of the things in this post by following along [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/tree/main/ch07) of his new book, [Build a Large Language Model (From Scratch)](https://www.manning.com/books/build-a-large-language-model-from-scratch).
 
 ### Model
@@ -26,11 +27,12 @@ Lucky for me, [Sebastian Raschka](https://sebastianraschka.com) has been putting
 I chose to go with a [Gemma 2B](https://huggingface.co/google/gemma-2-2b) model to fine-tune. You can choose any transformer model for this purpose really; the only constraint would be how many GPUs and time you have. You're essentially training the model on next token prediction with cross-entropy loss, but on a very specific kind of instruction-response data, and not the entire Internet. I chose Gemma because it already has both a base ([`gemma-2-2b`](https://huggingface.co/google/gemma-2b)) and an instruction-tuned ([`gemma-2-2b-it`](https://huggingface.co/google/gemma-2b-it)) variant---so there's already a good baseline to compare my IT fine-tune against.
 
 **Parameter-efficient fine-tuning.** Since I'm working with a larger model than the one used in the book (GPT-2), I had to make a few tradeoffs.
-Further, I did not want to buy a great deal of GPU compute on my Lightning [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code), so I resorted to doing a LoRA ([Hu et. al., 2021]((https://arxiv.org/abs/2106.09685))) parameter-efficient fine-tune, which vastly reduces the number of parameters to tweak.
+Further, I did not want to buy a great deal of GPU compute on my Lightning [studio](https://lightning.ai/alimuh/language-models/studios/instruction-tuning-gemma-2b/code), so I resorted to doing a LoRA ([Hu et. al., 2021](<(https://arxiv.org/abs/2106.09685)>)) parameter-efficient fine-tune, which vastly reduces the number of parameters to tweak.
 Compared to all 2.6b trainable parameters for a full fine-tune, with $r=8$ and $\alpha=32$, LoRA fine-tuned only ~1.5m (0.06%) of these.
 This allowed me to fit the whole job on a single A10G GPU.
 
 ### Dataset
+
 To teach a model to follow instructions, you first need a dataset of high-quality, ideally human-written instructions.
 Each of these instructions---like all supervised training data---has a clear input $x$ and output $y$; for IT purposes, these are called instructions and responses.
 Unfortunately, most instruction datasets, especially for large commercial models, tend to be proprietary.
@@ -67,14 +69,14 @@ Telegram
 **Formatting inputs.** A quick function to get this formatting for each point, taken from Raschka's book:
 
 ```
-def format_input(entry):    
+def format_input(entry):
     instruction_text = (
         f"Below is an instruction that describes a task. "
         f"Write a response that appropriately completes the request."
         f"\n\n### Instruction: \n{entry['instruction']}"
-    )    
+    )
     input_text = f"\n\n###Input: \n{entry['input'] if entry['input'] else ''}"
-    
+
     return instruction_text + input_text
 ```
 
@@ -92,7 +94,7 @@ def load_and_split_data(data_paths, train_split=0.85, test_split=0.1):
     for path in data_paths:
         with open(path, 'r') as f:
             data.extend(json.load(f))
-    
+
     N = len(data)
     print(f'Total data: {N}')
 
@@ -127,8 +129,7 @@ test_dataset = InstructionDataset(test_data, tokenizer)
 Before I talk about how HuggingFace's built-in methods can be used to implement IT, I wanted to discuss the from-scratch version presented in the book.
 It's a fantastic exercise to gain confidence, and see how incredibly simple the core logic is.
 
-
-To my surprise, most of the work happens in how the input and output tokens in the training batches are collated together. If you write PyTorch, you probably know that collate functions (`collate_fn`) in PyTorch are used to write the logic for how a DataLoader should stack together tensors for each batch ([PyTorch docs](https://pytorch.org/docs/stable/data.html)). Given a batch of sentences in the IT dataset, you carefully assemble the input and output tensors in `collate_fn` so the output tensor is one token ahead. So, the tall order of getting a model to follow instructions is, quite remarkably, just next token prediction on sentences that are written in a templated format of an *Instruction*, an *Input* and a *Response*. Given the massive [memory](https://memit.baulab.info/) of modern models, and the ability of Transformers to find the right context, this recipe just works.
+To my surprise, most of the work happens in how the input and output tokens in the training batches are collated together. If you write PyTorch, you probably know that collate functions (`collate_fn`) in PyTorch are used to write the logic for how a DataLoader should stack together tensors for each batch ([PyTorch docs](https://pytorch.org/docs/stable/data.html)). Given a batch of sentences in the IT dataset, you carefully assemble the input and output tensors in `collate_fn` so the output tensor is one token ahead. So, the tall order of getting a model to follow instructions is, quite remarkably, just next token prediction on sentences that are written in a templated format of an _Instruction_, an _Input_ and a _Response_. Given the massive [memory](https://memit.baulab.info/) of modern models, and the ability of Transformers to find the right context, this recipe just works.
 
 Raschka's [Chapter 7 notebook](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) does a wonderful job of slowly building up complexity by writing multiple drafts of the collate function before introducing the final version. I wholeheartedly recommend the exercise; I re-share the final collate function here with my comments:
 
@@ -140,7 +141,7 @@ def custom_collate_fn(
     # GPT-2's endoftext token ID
     pad_token_id=50256,
     # PyTorch's cross_entropy function will ignore these in computation
-    ignore_index=-100,    
+    ignore_index=-100,
     allowed_max_length=None,
     device="cpu"
 ):
@@ -149,7 +150,7 @@ def custom_collate_fn(
     that will be the width of the batch tensor
     """
     batch_max_length = max(len(item)+1 for item in batch)
-    
+
     """Assemble input and output in separate tensors"""
     inputs_lst, targets_lst = [], []
 
@@ -200,8 +201,8 @@ This is how all causal language modeling fine-tuning for any type of domain adap
 I somehow expected IT to have some additional magic, but it seems that it really doesn't---except for the cleverly designed dataset.
 The remainder of the [notebook](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) is largely an exposition of setting up the dataset, dataloader, and using a custom training loop to do the fine-tuning.
 
-
 ### Implementing with HuggingFace Trainer
+
 While I enjoyed the exercise of writing the whole training loop and data collation from scratch, when I started to work with LoRA, I wanted to fall back on tried-and-tested HuggingFace components like the good old `Trainer`.
 This allows quicker experimentation, quick integration of LoRA , and less debugging overall.
 Additionally, since IT doesn't have any additional magic as we've learnt, I could just use HuggingFace's [`DataCollatorForLanguageModeling`](https://huggingface.co/docs/transformers/v4.46.2/en/main_classes/data_collator#transformers.DataCollatorForLanguageModeling), which can be easily plugged into the `Trainer`.
@@ -216,12 +217,12 @@ from peft import (
     get_peft_model
 )
 
-def setup_lora_model(model, args=None):    
+def setup_lora_model(model, args=None):
     """
     Values hard-coded for clarity here,
     you'd want to use the args param for flexibility
     """
-    # Define LoRA Config    
+    # Define LoRA Config
     lora_config = LoraConfig(
         r=8,
         lora_alpha=32,
@@ -230,11 +231,11 @@ def setup_lora_model(model, args=None):
         bias="none",
         task_type=TaskType.CAUSAL_LM
     )
-    
+
     # Get PEFT model
     model = get_peft_model(model, lora_config)
     model.print_trainable_parameters()
-    
+
     return model
 
 model = AutoModelForCausalLM.from_pretrained(
@@ -271,7 +272,7 @@ training_args = TrainingArguments(
     warmup_steps=args.warmup_steps,
     learning_rate=args.learning_rate,
     weight_decay=args.weight_decay,
-    logging_dir="./logs"    
+    logging_dir="./logs"
 )
 
 trainer = Trainer(
@@ -304,10 +305,12 @@ python finetune.py \
     --load-in-8bit \
     --save-model --epochs 2
 ```
+
 A full log of the run on Weights & Biases can be seen [here](https://wandb.ai/muhammadali/instruction-tuning/runs/50d2phap).
 The final model is available on HuggingFace [here](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca).
 
 ## Qualitative Evaluation
+
 After fine-tuning the model, it's important to see if we have improved anything beyond the Gemma base model.
 It is common practice in such training runs to inspect a few examples by eye and qualitatively understand how we've changed the model.
 For better or worse, this has also come to be known as ["vibes-based evaluation"](https://www.interconnects.ai/p/the-interface-era-of-ai); but in principle, looking at your model's outputs is always a good idea.
@@ -381,7 +384,7 @@ Meanwhile, the base model starts listing a series of examples: it over-uses the 
 In another case, for the input `Recommend a tool for creating visual timelines`, our instruction-tuned model responds with:
 
 ```
-A great tool for creating visual timelines is TimelineJS. It is an open-source JavaScript library that allows you to create interactive timelines with ease. It is easy to use and has a wide range of features... [truncated] 
+A great tool for creating visual timelines is TimelineJS. It is an open-source JavaScript library that allows you to create interactive timelines with ease. It is easy to use and has a wide range of features... [truncated]
 ```
 
 The base model, in this case, answers:
@@ -410,13 +413,14 @@ An interesting appetizer could be artichoke pesto crostini. To make it, slice so
 Pretty delicious and well-written recipe. Compare this to our instruction tuned model's response:
 
 ```
-Lemon Artichoke Hearts Pesto Bites are a delicious appetizer made with lemon, artichoke hearts, and pesto. Simply mix the ingredients together and form into bite-sized balls. Bake for 15 minutes at 350 degrees Fahrenheit and enjoy! These bites are perfect for a party or a quick snack. They are sure to be a hit! 
+Lemon Artichoke Hearts Pesto Bites are a delicious appetizer made with lemon, artichoke hearts, and pesto. Simply mix the ingredients together and form into bite-sized balls. Bake for 15 minutes at 350 degrees Fahrenheit and enjoy! These bites are perfect for a party or a quick snack. They are sure to be a hit!
 #instruction #response #appetizer #lemon... [truncated]
 ```
 
 The recipe does use the provided ingredients, which is good. However, in terms of helpfulness, it largely like a semi-hallucination; it isn't possible to turn any set of ingredient mash into a bite-sized ball without anything to hold it together.
 
 The base model's response, in contrast:
+
 ```
 , Goat Cheese, Olive Oil, Garlic, Parmesan Cheese, Bread
 
@@ -438,12 +442,13 @@ I like this example because it shows so clearly the base model's tendency to jus
 These examples illustrate how IT changes the behavior of the model to make it act more helpful, respond more directly to requests, and take user inputs into account. You can see more examples in the [output file](https://github.com/mohummedalee/instruction-tuning-gemma-2b/output/test-data-w-responses.json) in the repo; there are even cases where the IT model does worse, surpriginly.
 
 #### Limitations
+
 The fine-tuned model is by no means perfect. It has a tendency to generate weird tokens such as "noinput", go off on tangents, do math poorly, and make up hallucinations of absurd things. I haven't experimented with hyperparameter tuning and am simply reporting a one-off experiment for the sake of exposition. I imagine a different combination of hyperparameters, a full fine-tune, or a more clever decoding approach could reduce these unhelpful behaviors.
 
 These qualitative examples also don't put concrete numbers on the performance to precisely compare with the base model. For that, we have to either run this through a benchmark that measures instruction-following capability, or use some survey approach to quantify the performance for each test datapoint---things that I hope to cover in a future post.
 
-
 ## Concluding Thoughts
+
 In this post, I went over my implementation of instruction tuning (IT); I showed how IT enables a Gemma 2B model to follow user prompts.
 I largely followed [Chapter 7](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/01_main-chapter-code/ch07.ipynb) of Sebastian Raschka's [book](https://www.manning.com/books/build-a-large-language-model-from-scratch), and made some gentle modifications to make the whole setup work with a larger model and HuggingFace's built-in training tools. All work is done on a small A10 GPU with 24GiB of VRAM. Qualitatively inspecting some examples from the test set, we saw how IT allows the model to respond more directly to requests than the base Gemma 2B model. The final model is available on HuggingFace as [`lukshmichowk/gemma-2b-it-alpaca`](https://huggingface.co/lukshmichowk/gemma-2b-it-alpaca).
 
