@@ -1,0 +1,28 @@
+/* Custom CSS overrides */
+
+/* Remove the dotted underline from bullet items themselves */
+.sidebar-nav .bullet {
+  text-decoration: none !important;
+}
+
+/* Add bullet point before each blog entry */
+.sidebar-nav .bullet::before {
+  content: "‣";
+  margin-right: 0.25em;
+  color: var(--sidebar-p-color);
+}
+
+/* Remove underline from sidebar blog post links by default */
+.sidebar-nav .bullet a {
+  text-decoration: none;
+}
+
+/* Add underline only to the active (current) page */
+.sidebar-nav .bullet a.active {
+  text-decoration: underline;
+}
+
+/* Keep hover effect for better UX */
+.sidebar-nav .bullet a:hover {
+  text-decoration: underline;
+}
