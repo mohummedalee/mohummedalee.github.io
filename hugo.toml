@@ -7,7 +7,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 [params]
     author = "Muhammad Ali"
     brand = "Ali"                            # name of your site - appears in the sidebar
-    brand_image = "/images/headshot-2.jpg"          # path to the image shown in the sidebar
+    brand_image = "/images/headshot.jpg"          # path to the image shown in the sidebar
     # description = "Northeastern University"   # Used as default meta description if not specified in front matter
     dark_mode = true                            # optional - defaults to false
     # favicon = "favicon.png"                   # path to favicon (defaults to favicon.png)
