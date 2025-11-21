@@ -9,7 +9,7 @@ Thanks for stopping by! My name is Ali, and I have 7+ years of experience in res
 
 #### Work
 
-At **Amazon**, I build data science tools to help [internal auditors](https://amazon.jobs/content/en/teams/fgbs/internal-audit) measure risk across Amazon's diverse businesses. At **Apple**, I built datasets and ran evaluations to test upcoming AI/ML features for safety. At **Oracle Labs**, I worked with the [ML Research Group](https://labs.oracle.com/pls/apex/f?p=94065:12:11060783655161:7) on measuring gender and racial biases in BERT as a function of the model's scale and pre-training data ([arXiv](https://arxiv.org/abs/2407.21058)). At **Intel**, I worked with AI and Analytics team to build the early version of an automated model card generator, and experimented with explainability methods for models on image and tabular data---the team later turned this work into a fantastic open souce Python [toolkit](https://github.com/intel/intel-xai-tools).
+At **Amazon**, I build data science tools to help [internal auditors](https://amazon.jobs/content/en/teams/fgbs/internal-audit) measure risk across Amazon's diverse businesses. At **Apple**, I built datasets and ran evaluations to test upcoming AI/ML features for safety. At **Oracle Labs**, I worked with the [ML Research Group](https://labs.oracle.com/pls/apex/f?p=94065:12:11060783655161:7) on measuring gender and racial biases in BERT as a function of the model's scale and pre-training data ([arXiv](https://arxiv.org/abs/2407.21058)). At **Intel**, I worked with AI and Analytics team to build ML model explainability and fairness tools---the team later turned this work into a fantastic open souce Python [toolkit](https://github.com/intel/intel-xai-tools).
 
 #### Research
 
@@ -21,7 +21,9 @@ This work was widely covered in the media ([Vox](https://www.youtube.com/watch?v
 
 #### Personal
 
-I live in Seattle, WA, with my wife and daugther. Previously, I've lived in Boston/Cambridge, MA---where I was a part of [Khoury College](https://www.khoury.northeastern.edu). In the more distant past, I lived in Saarbrücken, Germany---where I was a student at [Saarland University](https://www.uni-saarland.de/en/home.html), and a research assistant at the [Max Planck Institute for Software Systems](https://mpi-sws.org/). I am originally from [Lahore, Pakistan](https://youtu.be/N7kvo94PKN4?t=126). I am bilingual in Punjabi and Urdu, and speak just enough German to order a döner kebab. I enjoy reading, single player video games, tabla, and film photography.
+I live in Seattle, WA, with my wife and daugther. Previously, I've lived in Boston, MA---where I was a part of [Khoury College](https://www.khoury.northeastern.edu); Saarbrücken, Germany---where I was a student at [Saarland University](https://www.uni-saarland.de/en/home.html), and a research assistant at the [Max Planck Institute for Software Systems](https://mpi-sws.org/); and [Lahore, Pakistan](https://youtu.be/N7kvo94PKN4?t=126), where I am originally from.
+
+I am bilingual in Punjabi and Urdu, and speak just enough German to order a döner kebab. In the rare free time I have, I enjoy reading, single player video games, tabla, and film photography.
 
 <!-- Back in Lahore, I used to be a backend engineer at a small music startup called [Patari](https://en.wikipedia.org/wiki/Patari_(service)). -->
 
