@@ -1,7 +1,8 @@
 {{/* Personal/custom script for light/dark mode and tabs */}}
 {{ $js := slice
       (resources.Get "js/light_dark.js")
-      (resources.Get "js/tabs.js") }}
+      (resources.Get "js/tabs.js")
+      (resources.Get "js/mobile-scroll.js") }}
 
 {{/* Locally hosted code for KaTeX */}}
 {{ $js = $js | append
