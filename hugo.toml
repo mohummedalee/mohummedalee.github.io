@@ -102,6 +102,10 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
                                           # e.g. /assets/images/site/og-image.png becomes images/site/og-image.png
     # publisher_icon = ""                 # path to publisher icon - defaults to favicon, used in schema
 
+    # NOTE: Cloudflare Web Analytics configuration
+    cloudflare_analytics = true
+    cloudflare_token = "9df6ec0474864bea8f522ba5e64f81bc"
+
 # NOTE: If using Disqus as commenting engine, uncomment and configure this line
 [config]
     [[config.services]]
