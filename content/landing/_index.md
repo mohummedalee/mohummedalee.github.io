@@ -2,14 +2,14 @@
 layout: single
 ---
 
-👋🏽 I'm a data scientist and researcher based in Seattle.
-My [research](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) lies at the intersection of machine learning and human-computer interaction. I currently work at Amazon as an Applied Scientist in the [Internal Audit](https://amazon.jobs/content/en/teams/fgbs/internal-audit) organization, where I build ML/AI tools to measure risk across a variety of Amazon's businesses.
+👋🏽 I'm a machine learning [researcher](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) based in Seattle.
+I work at Amazon as an Applied Scientist, where I build ML/AI models to measure risk across a variety of Amazon's businesses, at scale.
 
 <!-- I enjoy building AI systems that are well-evaluated, robust, and solve real human problems. -->
 
 I finished my PhD in computer science at [Northeastern](https://www.khoury.northeastern.edu/~mali/), where I was a recipient of the [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
-I've previously worked at places like Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out.
+I've previously worked at places like Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out!
 
 ### Selected Papers
 
