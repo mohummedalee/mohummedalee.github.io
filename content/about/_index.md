@@ -5,11 +5,11 @@ layout: single
 
 ![a picture of Boston's Back Bay with the Charles River in the front](/images/boston.jpg)
 
-Thanks for stopping by! My name is Ali, and I have 7+ years of experience in research and engineering.
+Thanks for stopping by! My name is Ali, and I have 7+ years of experience in research and engineering at the intersection of ML and HCI.
 
 #### Work
 
-At **Amazon**, I build data science tools to help [internal auditors](https://amazon.jobs/content/en/teams/fgbs/internal-audit) measure risk across Amazon's diverse businesses. At **Apple**, I built datasets and ran evaluations to test upcoming AI/ML features for safety. At **Oracle Labs**, I worked with the [ML Research Group](https://labs.oracle.com/pls/apex/f?p=94065:12:11060783655161:7) on measuring gender and racial biases in BERT as a function of the model's scale and pre-training data ([arXiv](https://arxiv.org/abs/2407.21058)). At **Intel**, I worked with AI and Analytics team to build ML model explainability and fairness tools---the team later turned this work into a fantastic open souce Python [toolkit](https://github.com/intel/intel-xai-tools).
+At **Amazon**, I build ML/AI systems for automated risk detection, such as multi-step tool-calling agents to flag financial fraud. At **Apple**, I built synthetic datasets and ran evaluations to test upcoming AI/ML features for safety. At **Oracle Labs**, I worked with the [ML Research Group](https://labs.oracle.com/pls/apex/f?p=94065:12:11060783655161:7) on measuring gender and racial biases in BERT as a function of the model's scale and pre-training data ([arXiv](https://arxiv.org/abs/2407.21058)). At **Intel**, I worked with AI and Analytics team to build ML model explainability and fairness tools---which eventually became an open souce Python [toolkit](https://github.com/intel/intel-xai-tools).
 
 #### Research
 
