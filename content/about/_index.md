@@ -9,7 +9,7 @@ Thanks for stopping by! My name is Ali, and I have 7+ years of experience in res
 
 #### Work
 
-At **Amazon**, I build ML/AI systems for automated risk detection, such as multi-step tool-calling agents to flag financial fraud. At **Apple**, I built synthetic datasets and ran evaluations to test upcoming AI/ML features for safety. At **Oracle Labs**, I worked with the [ML Research Group](https://labs.oracle.com/pls/apex/f?p=94065:12:11060783655161:7) on measuring gender and racial biases in BERT as a function of the model's scale and pre-training data ([arXiv](https://arxiv.org/abs/2407.21058)). At **Intel**, I worked with AI and Analytics team to build ML model explainability and fairness tools---which eventually became an open souce Python [toolkit](https://github.com/intel/intel-xai-tools).
+At **Amazon**, I build AI systems for automated risk detection, such as multi-step tool-calling agents to flag financial fraud. At **Apple**, I built synthetic datasets and ran evaluations to test upcoming AI/ML features for safety. At **Oracle Labs**, I worked with the [ML Research Group](https://labs.oracle.com/pls/apex/f?p=94065:12:11060783655161:7) on measuring gender and racial biases in BERT as a function of the model's scale and pre-training data ([arXiv](https://arxiv.org/abs/2407.21058)). At **Intel**, I worked with AI and Analytics team to build ML model explainability and fairness tools---which eventually became an open souce Python [toolkit](https://github.com/intel/intel-xai-tools).
 
 #### Research
 
@@ -35,4 +35,4 @@ frequently used tools like , Docker, AWS, SQL, among many others.
 
 _Header: Boston's Back Bay as seen from Longfellow Bridge, shot on Kodak Gold 200._
 
-Last updated: _November 16, 2025_
+Last updated: _February 26, 2025_
