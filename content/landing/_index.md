@@ -2,7 +2,7 @@
 layout: single
 ---
 
-👋🏽 I'm a machine learning [researcher](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) based in Seattle.
+👋🏽 I'm a machine learning [researcher](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) and [engineer](https://github.com/mohummedalee) based in Seattle.
 I work at Amazon as an Applied Scientist, where I build ML/AI models to measure risk across a variety of Amazon's businesses, at scale.
 
 <!-- I enjoy building AI systems that are well-evaluated, robust, and solve real human problems. -->
