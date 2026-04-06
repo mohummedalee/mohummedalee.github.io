@@ -30,6 +30,7 @@ I've previously worked at places like Apple, Intel, Oracle Labs and the Max Plan
   - Responsible Generative AI (ReGenAI) @ CVPR '24
 
 * **External Reviewing:**
+  - FAccT '26
   - CHI '25
   - ICWSM '25
   - NeurIPS '24, '23, '21
