@@ -3,13 +3,13 @@ layout: single
 ---
 
 👋🏽 I'm a machine learning [researcher](https://scholar.google.com/citations?user=pLeu3X0AAAAJ) and [engineer](https://github.com/mohummedalee) based in Seattle.
-I work at Amazon as an Applied Scientist, where I build ML/AI models to measure risk across a variety of Amazon's businesses, at scale.
+I currently work at Airbnb, where I build ML/AI systems to improve the customer service experience.
 
 <!-- I enjoy building AI systems that are well-evaluated, robust, and solve real human problems. -->
 
 I finished my PhD in computer science at [Northeastern](https://www.khoury.northeastern.edu/~mali/), where I was a recipient of the [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
-I've previously worked at places like Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out!
+I've previously worked at places like Amazon, Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out!
 
 ### Selected Papers
 
@@ -23,6 +23,7 @@ I've previously worked at places like Apple, Intel, Oracle Labs and the Max Plan
 ### Service
 
 - **Program Committees:**
+  - 3rd Workshop on Agentic and Generative AI for E-Commerce @ RecSys '26
   - FAccT '24, '23, '22, '21
   - IC2S2 '24, '23
   - TheWebConf '23
