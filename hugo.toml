@@ -28,7 +28,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     # front_page_content = ["about", "posts"]
 
     # Links to your socials.  Comment or delete any you don't need/use. 
-    cv_url = "/cv.pdf"
+    cv_url = "/cv-ali.pdf"
     scholar_url = "https://scholar.google.com/citations?user=pLeu3X0AAAAJ"
     # discord_url = "https://discord.com"
     # email_url = "mailto://user@domain"

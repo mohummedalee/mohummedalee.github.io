@@ -9,7 +9,7 @@ I currently work at Airbnb, where I build ML/AI systems to improve the customer 
 
 I finished my PhD in computer science at [Northeastern](https://www.khoury.northeastern.edu/~mali/), where I was a recipient of the [Outstanding Graduate Student](https://provost.northeastern.edu/academic-honors/graduate-awards/graduate-research-awards/) award.
 
-I've previously worked at places like Amazon, Apple, Intel, Oracle Labs and the Max Planck Institute. If you'd like to collaborate on a software or research project, please reach out!
+I've previously worked at places like Amazon, Apple, Intel, Oracle Labs and the Max Planck Institute.
 
 ### Selected Papers
 
